@@ -1,0 +1,168 @@
+{
+  "description": "Get all merchant emails, name who have payments greater than 10000 and channel through axis2",
+  "select": {
+    "fields": [
+      {
+        "fieldAlias": "email",
+        "fieldDbName": "contact_email",
+        "objectName": "merchant_details",
+        "objectDbName": "merchant_details",
+        "fieldType": "BASE",
+        "hasLookup": true,
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          },
+          "fieldPath": {
+            "lookupName": "l2",
+            "joinType": "LEFT_JOIN",
+            "right": {
+              "objectName": "transactions",
+              "objectDbName": "transactions",
+              "fieldDbName": "merchant_id"
+            },
+            "left": {
+              "objectName": "merchants",
+              "objectDbName": "merchants",
+              "fieldDbName": "id"
+            },
+            "fieldPath": {
+              "lookupName": "l3",
+              "joinType": "LEFT_JOIN",
+              "right": {
+                "objectName": "merchants",
+                "objectDbName": "merchants",
+                "fieldDbName": "id"
+              },
+              "left": {
+                "objectName": "merchant_details",
+                "objectDbName": "merchant_details",
+                "fieldDbName": "merchant_id"
+              }
+            }
+          }
+        }
+      },
+      {
+        "fieldAlias": "merchant_name",
+        "fieldDbName": "name",
+        "objectName": "merchants",
+        "objectDbName": "merchants",
+        "fieldType": "BASE",
+        "hasLookup": true,
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          },
+          "fieldPath": {
+            "lookupName": "l2",
+            "joinType": "LEFT_JOIN",
+            "right": {
+              "objectName": "transactions",
+              "objectDbName": "transactions",
+              "fieldDbName": "merchant_id"
+            },
+            "left": {
+              "objectName": "merchants",
+              "objectDbName": "merchants",
+              "fieldDbName": "id"
+            }
+          }
+        }
+      },
+      {
+        "fieldAlias": "Amount",
+        "fieldType": "BASE",
+        "fieldDbName": "amount_authorized",
+        "objectName": "payments",
+        "objectDbName": "payments",
+        "hasLookup": false
+      },
+      {
+        "fieldDbName": "channel",
+        "fieldAlias": "channel",
+        "objectDbName": "transactions",
+        "hasLookup": true,
+        "fieldType": "BASE",
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          }
+        }
+      }
+    ]
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "filterField": {
+          "fieldDbName": "amount_authorized",
+          "objectDbName": "payments",
+          "dataType": "INTEGER",
+          "hasLookup": false
+        },
+        "operator": "GT",
+        "filterValue": {
+          "value": [
+            "10000"
+          ]
+        }
+      },
+      {
+        "filterField": {
+          "fieldDbName": "channel",
+          "objectDbName": "transactions",
+          "dataType": "STRING",
+          "hasLookup": true,
+          "fieldPath": {
+            "joinType": "LEFT_JOIN",
+            "lookupName": "l1",
+            "right": {
+              "objectName": "payments",
+              "objectDbName": "payments",
+              "fieldDbName": "transaction_id"
+            },
+            "left": {
+              "objectName": "transactions",
+              "objectDbName": "transactions",
+              "fieldDbName": "id"
+            }
+          }
+        },
+        "operator": "EQ",
+        "filterValue": {
+          "value": [
+            "axis2"
+          ]
+        }
+      }
+    ]
+  }
+}

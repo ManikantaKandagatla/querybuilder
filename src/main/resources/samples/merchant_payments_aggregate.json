@@ -1,0 +1,144 @@
+{
+  "description": "Count all the payments group by merchantId and payment_method",
+  "select": {
+    "fields": [
+      {
+        "fieldType": "MEASURE",
+        "fieldAlias": "no_of_payments",
+        "aggregateFunction": "COUNT",
+        "objectName": "payments",
+        "objectDbName": "payments",
+        "hasLookup": false
+      },
+      {
+        "fieldDbName": "merchant_id",
+        "fieldAlias": "merchant_id",
+        "objectDbName": "transactions",
+        "hasLookup": true,
+        "fieldType": "BASE",
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          }
+        }
+      },
+      {
+        "fieldDbName": "payment_method",
+        "fieldAlias": "payment_method",
+        "objectDbName": "pricing",
+        "hasLookup": true,
+        "fieldType": "BASE",
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          },
+          "fieldPath": {
+            "joinType": "LEFT_JOIN",
+            "lookupName":"l3",
+            "right": {
+              "objectName": "transactions",
+              "objectDbName": "transactions",
+              "fieldDbName": "pricing_rule_id"
+            },
+            "left": {
+              "objectName": "pricing",
+              "objectDbName": "pricing",
+              "fieldDbName": "id"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "groupBy": {
+    "fields": [
+      {
+        "fieldDbName": "merchant_id",
+        "fieldAlias": "merchant_id",
+        "objectDbName": "transactions",
+        "hasLookup": true,
+        "fieldType": "BASE",
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          }
+        }
+      },
+      {
+        "fieldDbName": "payment_method",
+        "fieldAlias": "payment_method",
+        "objectDbName": "pricing",
+        "hasLookup": true,
+        "fieldType": "BASE",
+        "fieldPath": {
+          "lookupName": "l1",
+          "joinType": "LEFT_JOIN",
+          "right": {
+            "objectName": "payments",
+            "objectDbName": "payments",
+            "fieldDbName": "transaction_id"
+          },
+          "left": {
+            "objectName": "transactions",
+            "objectDbName": "transactions",
+            "fieldDbName": "id"
+          },
+          "fieldPath": {
+            "joinType": "LEFT_JOIN",
+            "lookupName": "l3",
+            "right": {
+              "objectName": "transactions",
+              "objectDbName": "transactions",
+              "fieldDbName": "pricing_rule_id"
+            },
+            "left": {
+              "objectName": "pricing",
+              "objectDbName": "pricing",
+              "fieldDbName": "id"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "orderBy": {
+    "fields": [
+      {
+        "fieldType": "MEASURE",
+        "fieldAlias": "no_of_payments",
+        "aggregateFunction": "COUNT",
+        "objectName": "payments",
+        "objectDbName": "payments",
+        "hasLookup": false,
+        "sortOrder": "DESC"
+      }
+    ]
+  }
+}
