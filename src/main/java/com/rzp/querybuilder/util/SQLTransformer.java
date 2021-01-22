@@ -112,13 +112,13 @@ public class SQLTransformer {
         }
     }
 
-    public void setLimit(int limit) {
+    private void setLimit(int limit) {
         if (limit != 0) {
             this.selectQuery.addCustomization(new PgLimitClause(this.queryMaster.getLimit()));
         }
     }
 
-    public void setOffset(int offset) {
+    private void setOffset(int offset) {
         if (offset != 0) {
             this.selectQuery.setOffset(this.queryMaster.getOffset());
         }
@@ -139,7 +139,7 @@ public class SQLTransformer {
         return condition;
     }
 
-    public SqlObject processField(BaseField field) {
+    private SqlObject processField(BaseField field) {
         FieldType fieldType = Objects.isNull(field.getFieldType()) ? FieldType.BASE : field.getFieldType();
         SqlObject sqlObject = null;
         switch (fieldType) {
@@ -153,7 +153,7 @@ public class SQLTransformer {
         return sqlObject;
     }
 
-    public FunctionCall processMeasure(BaseField measure) {
+    private FunctionCall processMeasure(BaseField measure) {
         SqlObject fld = processBaseField(measure);
         String alias = StringUtils.isBlank(measure.getFieldAlias())? getNewFieldAlias() : measure.getFieldAlias();
         measure.setFieldAlias(alias);
@@ -166,7 +166,7 @@ public class SQLTransformer {
         return functionCall;
     }
 
-    public SqlObject processBaseField(BaseField field) {
+    private SqlObject processBaseField(BaseField field) {
         DbTable table = null;
         String selectColumn = null;
         if (field.isHasLookup()) {
