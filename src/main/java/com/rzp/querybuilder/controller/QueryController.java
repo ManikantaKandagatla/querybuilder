@@ -24,7 +24,7 @@ public class QueryController {
         return coreDao.getData(query, new HashMap<>());
     }
 
-    @RequestMapping(method = RequestMethod.POST,path = "/getQuery")
+    @RequestMapping(method = RequestMethod.POST,path = "/buildQuery")
     public Map<String, Object> getQuery(@RequestBody QueryMaster reportConfig)
     {
         SQLTransformer sqlTransformer = new SQLTransformer(reportConfig);
