@@ -27,5 +27,9 @@ API:
 2. POST : http://localhost:8080/buildQuery
    Request payload: sample request
 
-
+How to run:
+1. Download the code
+2. Change the datasource properties accordingly in application.properties
+2. Run : mvn clean install 
+3. Start springboot application -> main class: QuerybuilderApplication
 
