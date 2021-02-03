@@ -1,0 +1,74 @@
+{
+  "objectName": "commissions",
+  "objectGroupType": "system",
+  "dataStoreType": "MYSQL",
+  "columns": [
+    {
+      "displayName": "id",
+      "fieldDbName": "id",
+      "dataType": "STRING",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "partner id",
+      "fieldDbName": "partner_id",
+      "dataType": "STRING",
+      "hasLookup": true,
+      "lookupObject": [
+        {
+          "objectName": "merchant",
+          "fieldDbName": "id"
+        }
+      ],
+      "reportable": true
+    },
+    {
+      "displayName": "partner config id",
+      "fieldDbName": "partner_config_id",
+      "dataType": "STRING",
+      "hasLookup": true,
+      "lookupObject": [
+        {
+          "objectName": "partner_configs",
+          "fieldDbName": "id"
+        }
+      ],
+      "reportable": true
+    },
+    {
+      "displayName": "transaction id",
+      "fieldDbName": "transaction_id",
+      "dataType": "STRING",
+      "hasLookup": true,
+      "lookupObject": [
+        {
+          "objectName": "transaction",
+          "fieldDbName": "id"
+        }
+      ],
+      "reportable": true
+    },
+    {
+      "displayName": "tax",
+      "fieldDbName": "tax",
+      "dataType": "INTEGER",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "fee",
+      "fieldDbName": "fee",
+      "dataType": "INTEGER",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "commision status",
+      "fieldDbName": "status",
+      "dataType": "STRING",
+      "hasLookup": false,
+      "reportable": true
+    }
+  ]
+}

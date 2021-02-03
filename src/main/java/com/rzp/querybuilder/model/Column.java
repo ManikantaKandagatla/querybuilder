@@ -3,13 +3,15 @@ package com.rzp.querybuilder.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class Column {
     private String fieldDbName;
-    private String objectDbName;
+    private String displayName;
     private DataType dataType;
     private boolean hasLookup;
-    private LookupDetail lookupObject;
+    private List<LookupDetail> lookupObject;
     private boolean reportable;
 }

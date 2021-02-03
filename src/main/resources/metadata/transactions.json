@@ -1,0 +1,83 @@
+{
+  "objectName": "transactions",
+  "objectGroupType": "system",
+  "dataStoreType": "MYSQL",
+  "columns": [
+    {
+      "displayName": "id",
+      "fieldDbName": "id",
+      "dataType": "STRING",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "type",
+      "fieldDbName": "type",
+      "dataType": "STRING",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "entity_id",
+      "fieldDbName": "entity_id",
+      "dataType": "STRING",
+      "hasLookup": true,
+      "lookupObject": [
+        {
+          "objectName": "refunds",
+          "fieldDbName": "id"
+        },
+        {
+          "objectName": "payments",
+          "fieldDbName": "id"
+        },
+        {
+          "objectName": "commissions",
+          "fieldDbName": "id"
+        }
+      ],
+      "reportable": true
+    },
+    {
+      "displayName": "channel",
+      "fieldDbName": "channel",
+      "dataType": "STRING",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "amount",
+      "fieldDbName": "tax",
+      "dataType": "INTEGER",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "merchant_id",
+      "fieldDbName": "merchant_id",
+      "dataType": "STRING",
+      "hasLookup": true,
+      "lookupObject": [
+        {
+          "objectName": "merchants",
+          "fieldDbName": "id"
+        }
+      ],
+      "reportable": true
+    },
+    {
+      "displayName": "fee",
+      "fieldDbName": "fee",
+      "dataType": "INTEGER",
+      "hasLookup": false,
+      "reportable": true
+    },
+    {
+      "displayName": "tax",
+      "fieldDbName": "tax",
+      "dataType": "INTEGER",
+      "hasLookup": false,
+      "reportable": true
+    }
+  ]
+}
